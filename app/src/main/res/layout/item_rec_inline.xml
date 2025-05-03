@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:layout_marginBottom="35dp">
+
+    <include
+        android:id="@+id/clubAvatar"
+        layout="@layout/item_club_icon"
+        android:layout_width="38dp"
+        android:layout_height="38dp"/>
+
+    <TextView
+        android:id="@+id/tvRecClub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_semibold"
+        android:text="SDU Puzzle Club"
+        android:textColor="@color/black_1000"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFollow"
+        android:layout_width="121dp"
+        android:layout_height="24dp"
+        android:background="@drawable/sh_rounded_blue"
+        android:backgroundTint="@color/blue_800"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Follow"
+        android:textAllCaps="false"
+        android:textColor="@color/white_1000"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</LinearLayout>

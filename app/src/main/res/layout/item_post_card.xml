@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/llClubInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingVertical="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/clubAvatar"
+            layout="@layout/item_club_icon"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="13dp"/>
+
+        <TextView
+            android:id="@+id/tvClubName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_semibold"
+            android:textColor="@color/black_1000"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Puzzle Club SDU"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:textSize="12sp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/grey_200"
+            android:text="49m"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llClubInfo"
+        android:layout_marginHorizontal="60dp">
+
+        <TextView
+            android:id="@+id/tvPostName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_light"
+            android:textColor="@color/black_1000"
+            android:ellipsize="end"
+            android:text="HI THERE! We are PUZZLE club!"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivPostImage"
+            android:layout_width="249dp"
+            android:layout_height="246dp"
+            android:layout_marginTop="13dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/style_corner_25dp"
+            android:src="@drawable/puzzle_club"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="18dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btnLike"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_unliked"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btnMessage"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_message"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btnRepost"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_repost"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btnSend"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_send"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

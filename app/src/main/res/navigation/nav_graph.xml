@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/welcomeFragment">
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.unihub.presentation.authentication.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.unihub.presentation.authentication.signup.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_verifyFragment2"
+            app:destination="@id/verifyFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_signInAdminFragment"
+            app:destination="@id/signInAdminFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.unihub.presentation.authentication.login.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_resetFragment"
+            app:destination="@id/resetFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_adminPageFragment"
+            app:destination="@id/adminPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetFragment"
+        android:name="com.example.unihub.presentation.authentication.login.ResetFragment"
+        android:label="fragment_reset"
+        tools:layout="@layout/fragment_reset" >
+        <action
+            android:id="@+id/action_resetFragment_to_resetSuccessFragment"
+            app:destination="@id/resetSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.example.unihub.presentation.authentication.signup.SuccessFragment"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success" >
+        <action
+            android:id="@+id/action_successFragment2_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_successFragment_to_adminPageFragment"
+            app:destination="@id/adminPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verifyFragment"
+        android:name="com.example.unihub.presentation.authentication.signup.VerifyFragment"
+        android:label="fragment_verify"
+        tools:layout="@layout/fragment_verify" >
+        <action
+            android:id="@+id/action_verifyFragment2_to_successFragment2"
+            app:destination="@id/successFragment" />
+        <action
+            android:id="@+id/action_verifyFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.unihub.presentation.home.posts.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_clubPageFragment"
+            app:destination="@id/clubPageFragment">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
+        <action
+            android:id="@+id/action_homeFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_newQuoteFragment"
+            app:destination="@id/newQuoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInAdminFragment"
+        android:name="com.example.unihub.presentation.authentication.signup.SignInAdminFragment"
+        android:label="fragment_sign_in_admin"
+        tools:layout="@layout/fragment_sign_in_admin" >
+        <action
+            android:id="@+id/action_signInAdminFragment_to_verifyFragment"
+            app:destination="@id/verifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.unihub.presentation.notifications.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.unihub.presentation.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clubPageFragment"
+        android:name="com.example.unihub.presentation.home.club.ClubPageFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_club_page">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_clubPageFragment_to_bookingFragment"
+            app:destination="@id/bookingFragment">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
+        <action
+            android:id="@+id/action_clubPageFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+        <action
+            android:id="@+id/action_clubPageFragment_to_newQuoteFragment"
+            app:destination="@id/newQuoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.unihub.presentation.home.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/adminPageFragment"
+        android:name="com.example.unihub.presentation.admin.AdminPageFragment"
+        android:label="fragment_admin_page"
+        tools:layout="@layout/fragment_admin_page" >
+        <action
+            android:id="@+id/action_adminPageFragment_to_editUserFragment"
+            app:destination="@id/editUserFragment" />
+        <action
+            android:id="@+id/action_adminPageFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
+        <action
+            android:id="@+id/action_adminPageFragment_to_requestsListFragment"
+            app:destination="@id/requestsListFragment" />
+        <action
+            android:id="@+id/action_adminPageFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_adminPageFragment_to_deleteUserSuccessFragment"
+            app:destination="@id/deleteUserSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editUserFragment"
+        android:name="com.example.unihub.presentation.admin.EditUserFragment"
+        android:label="fragment_edit_user"
+        tools:layout="@layout/fragment_edit_user" >
+        <action
+            android:id="@+id/action_editUserFragment_to_adminPageFragment"
+            app:destination="@id/adminPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.example.unihub.presentation.admin.AddUserFragment"
+        android:label="fragment_add_user"
+        tools:layout="@layout/fragment_add_user" >
+        <action
+            android:id="@+id/action_addUserFragment_to_addUserSuccessFragment"
+            app:destination="@id/addUserSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestsListFragment"
+        android:name="com.example.unihub.presentation.admin.RequestsListFragment"
+        android:label="fragment_requests_list"
+        tools:layout="@layout/fragment_requests_list" >
+        <action
+            android:id="@+id/action_requestsListFragment_to_createClubRequestFragment"
+            app:destination="@id/createClubRequestFragment">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+            <argument
+                android:name="fromAdmin"
+                app:argType="boolean" />
+        </action>
+        <action
+            android:id="@+id/action_requestsListFragment_to_createEventRequestFragment"
+            app:destination="@id/createEventRequestFragment" >
+            <argument
+                android:name="id"
+                app:argType="integer" />
+            <argument
+                android:name="fromAdmin"
+                app:argType="boolean" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.unihub.presentation.profile.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_successChangePasswordFragment"
+            app:destination="@id/successChangePasswordFragment"
+            app:popUpTo="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.unihub.presentation.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.unihub.presentation.profile.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_createRequestFragment"
+            app:destination="@id/createRequestFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_newQuoteFragment"
+            app:destination="@id/newQuoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.example.unihub.presentation.profile.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.unihub.presentation.profile.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createRequestFragment"
+        android:name="com.example.unihub.presentation.profile.CreateRequestFragment"
+        android:label="fragment_create_request"
+        tools:layout="@layout/fragment_create_request" >
+        <action
+            android:id="@+id/action_createRequestFragment_to_createClubRequestFragment"
+            app:destination="@id/createClubRequestFragment" >
+            <argument
+                android:name="id"
+                app:argType="integer" />
+            <argument
+                android:name="fromAdmin"
+                app:argType="boolean" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.unihub.presentation.calendar.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
+        <action
+            android:id="@+id/action_calendarFragment_to_addEventFragment"
+            app:destination="@id/addEventFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/activitiesFragment"
+        android:name="com.example.unihub.presentation.notifications.ActivitiesFragment"
+        android:label="fragment_activities"
+        tools:layout="@layout/fragment_activities" >
+        <action
+            android:id="@+id/action_activitiesFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_activitiesFragment_to_bookingDetailsFragment"
+            app:destination="@id/bookingDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.example.unihub.presentation.calendar.EventsFragment"
+        android:label="fragment_events"
+        tools:layout="@layout/fragment_events">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatBotFragment"
+        android:name="com.example.unihub.presentation.chat.ChatBotFragment"
+        android:label="fragment_chat_bot"
+        tools:layout="@layout/fragment_chat_bot" />
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.example.unihub.presentation.home.club.BookingFragment"
+        android:label="fragment_booking"
+        tools:layout="@layout/fragment_booking">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_bookingFragment_to_registerBookingFragment"
+            app:destination="@id/registerBookingFragment">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/registerBookingFragment"
+        android:name="com.example.unihub.presentation.home.club.RegisterBookingFragment"
+        android:label="fragment_register_booking"
+        tools:layout="@layout/fragment_register_booking" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_registerBookingFragment_to_clubPageFragment"
+            app:destination="@id/clubPageFragment">
+            <argument
+                android:name="type"
+                app:argType="string" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/addEventFragment"
+        android:name="com.example.unihub.presentation.calendar.AddEventFragment"
+        android:label="fragment_add_event"
+        tools:layout="@layout/fragment_add_event" />
+    <fragment
+        android:id="@+id/createClubRequestFragment"
+        android:name="com.example.unihub.presentation.requests.CreateClubRequestFragment"
+        android:label="fragment_create_club_request"
+        tools:layout="@layout/fragment_create_club_request">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="fromAdmin"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_createClubRequestFragment_to_requestConfirmSuccessFragment"
+            app:destination="@id/requestConfirmSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEventRequestFragment"
+        android:name="com.example.unihub.presentation.requests.CreateEventRequestFragment"
+        android:label="fragment_create_event_request"
+        tools:layout="@layout/fragment_create_event_request" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="fromAdmin"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_createEventRequestFragment_to_requestConfirmSuccessFragment"
+            app:destination="@id/requestConfirmSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserSuccessFragment"
+        android:name="com.example.unihub.presentation.admin.AddUserSuccessFragment"
+        android:label="fragment_add_user_success"
+        tools:layout="@layout/fragment_add_user_success" >
+        <action
+            android:id="@+id/action_addUserSuccessFragment_to_adminPageFragment"
+            app:destination="@id/adminPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteUserSuccessFragment"
+        android:name="com.example.unihub.presentation.admin.DeleteUserSuccessFragment"
+        android:label="fragment_delete_user_success"
+        tools:layout="@layout/fragment_delete_user_success" >
+        <action
+            android:id="@+id/action_deleteUserSuccessFragment_to_adminPageFragment"
+            app:destination="@id/adminPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestConfirmSuccessFragment"
+        android:name="com.example.unihub.presentation.requests.RequestConfirmSuccessFragment"
+        android:label="fragment_request_confirm_success"
+        tools:layout="@layout/fragment_request_confirm_success" >
+        <action
+            android:id="@+id/action_requestConfirmSuccessFragment_to_requestsListFragment"
+            app:destination="@id/requestsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetSuccessFragment"
+        android:name="com.example.unihub.presentation.authentication.login.ResetSuccessFragment"
+        android:label="fragment_reset_success"
+        tools:layout="@layout/fragment_reset_success" >
+        <action
+            android:id="@+id/action_resetSuccessFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clubProfileFragment"
+        android:name="com.example.unihub.presentation.club.ClubProfileFragment"
+        android:label="fragment_club_profile"
+        tools:layout="@layout/fragment_club_profile" >
+        <action
+            android:id="@+id/action_clubProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_clubProfileFragment_to_createRequestFragment"
+            app:destination="@id/createRequestFragment" />
+        <action
+            android:id="@+id/action_clubProfileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_clubProfileFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+        <action
+            android:id="@+id/action_clubProfileFragment_to_newQuoteFragment"
+            app:destination="@id/newQuoteFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/repostBottomSheet"
+        android:name="com.example.unihub.presentation.home.posts.RepostBottomSheet"
+        android:label="fragment_repost_bottom_sheet"
+        tools:layout="@layout/fragment_repost_bottom_sheet" >
+        <action
+            android:id="@+id/action_repostBottomSheet_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/successChangePasswordFragment"
+        android:name="com.example.unihub.presentation.profile.SuccessChangePasswordFragment"
+        android:label="fragment_success_change_password"
+        tools:layout="@layout/fragment_success_change_password" />
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.example.unihub.presentation.home.comments.CommentsFragment"
+        android:label="fragment_comments"
+        tools:layout="@layout/fragment_comments" />
+    <dialog
+        android:id="@+id/shareBottomSheet"
+        android:name="com.example.unihub.presentation.home.posts.ShareBottomSheet"
+        android:label="fragment_share_bottom_sheet"
+        tools:layout="@layout/fragment_share_bottom_sheet" >
+        <action
+            android:id="@+id/action_shareBottomSheet_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/createEventFragment"
+        android:name="com.example.unihub.presentation.club.CreateEventFragment"
+        android:label="fragment_create_event"
+        tools:layout="@layout/fragment_create_event" >
+        <action
+            android:id="@+id/action_createEventFragment_to_createNewPostFragment"
+            app:destination="@id/createNewPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newQuoteFragment"
+        android:name="com.example.unihub.presentation.home.posts.NewQuoteFragment"
+        android:label="fragment_new_quote"
+        tools:layout="@layout/fragment_new_quote" />
+    <fragment
+        android:id="@+id/createNewPostFragment"
+        android:name="com.example.unihub.presentation.club.CreateNewPostFragment"
+        android:label="fragment_create_new_post"
+        tools:layout="@layout/fragment_create_new_post" >
+        <action
+            android:id="@+id/action_createNewPostFragment_to_createEventFragment"
+            app:destination="@id/createEventFragment" />
+        <action
+            android:id="@+id/action_createNewPostFragment_to_createPosterFragment"
+            app:destination="@id/createPosterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPosterFragment"
+        android:name="com.example.unihub.presentation.club.CreatePosterFragment"
+        android:label="fragment_create_poster"
+        tools:layout="@layout/fragment_create_poster" >
+        <action
+            android:id="@+id/action_createPosterFragment_to_createNewPostFragment"
+            app:destination="@id/createNewPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingDetailsFragment"
+        android:name="com.example.unihub.presentation.home.club.BookingDetailsFragment"
+        android:label="fragment_booking_details"
+        tools:layout="@layout/fragment_booking_details" />
+</navigation>

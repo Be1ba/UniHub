@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="119dp"
+    android:layout_height="158dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/sh_20dp"
+    android:backgroundTint="@color/grey_700"
+    android:paddingHorizontal="16dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivRecClub"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="20dp"
+        app:shapeAppearanceOverlay="@style/style_corner_rounded"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sdu_people"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRecClub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="SDU people"
+        android:textColor="@color/black_1000"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivRecClub" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFollow"
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/sh_rounded"
+        android:backgroundTint="@color/blue_800"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Follow"
+        android:textAllCaps="false"
+        android:textColor="@color/white_1000"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

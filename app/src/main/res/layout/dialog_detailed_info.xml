@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/sh_12dp"
+    android:backgroundTint="@color/white_1000"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_cross"
+        android:background="@color/white_1000"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/black_1000"
+        android:ellipsize="end"
+        android:text="Detailed Information"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toEndOf="@+id/btnClose"
+        app:layout_constraintTop_toTopOf="@+id/btnClose"
+        app:layout_constraintBottom_toBottomOf="@+id/btnClose"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/ivClubMotto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_motto"
+        android:background="@color/white_1000"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnClose"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvClubMotto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black_1000"
+        android:ellipsize="end"
+        android:text="Пазл клуб СДУ!"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toEndOf="@+id/ivClubMotto"
+        app:layout_constraintTop_toTopOf="@+id/ivClubMotto"
+        app:layout_constraintBottom_toBottomOf="@+id/ivClubMotto"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/ivClubInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_info"
+        android:background="@color/white_1000"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/ivClubMotto"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvClubInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black_1000"
+        android:ellipsize="end"
+        android:text="Здесь мы будем собирать пазлы и и интересно проводить время:)"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toEndOf="@+id/ivClubInfo"
+        app:layout_constraintTop_toTopOf="@+id/ivClubInfo"
+        app:layout_constraintBottom_toBottomOf="@+id/ivClubInfo"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/divider_1dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvClubInfo" />
+
+    <TextView
+        android:id="@+id/tvContacts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/black_1000"
+        android:ellipsize="end"
+        android:text="Contacts"
+        android:layout_marginTop="38dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvClubInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/llContacts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvContacts">
+
+        <LinearLayout
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            android:background="@drawable/sh_stroke_1dp"
+            android:padding="2dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivClubAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/style_corner_rounded"
+                android:src="@drawable/puzzle_club"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvRequestsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Zhasmin Arman"
+                android:textColor="@color/black_1000"
+                android:textSize="13sp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:text="Admin of the club"
+                android:textColor="@color/black_1000"
+                android:textSize="10sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/divider_1dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintTop_toBottomOf="@+id/llContacts"/>
+
+    <TextView
+        android:id="@+id/tvContactNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/black_1000"
+        android:ellipsize="end"
+        android:text="Contact number"
+        android:layout_marginTop="38dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/llContacts"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/ivNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_phone"
+        android:background="@color/white_1000"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvContactNumber"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:fontFamily="@font/roboto_light"
+        android:textColor="@color/black_1000"
+        android:ellipsize="end"
+        android:text="8 747 777 77 77"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toEndOf="@+id/ivNumber"
+        app:layout_constraintTop_toTopOf="@+id/ivNumber"
+        app:layout_constraintBottom_toBottomOf="@+id/ivNumber"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

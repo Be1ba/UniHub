@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_900"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.calendar.EventsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_arrow_back"
+            android:background="@color/transparent"
+            android:layout_marginTop="58dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:background="@drawable/sh_12dp"
+            android:backgroundTint="@color/grey_100"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:fontFamily="@font/roboto_semibold"
+            android:textSize="16sp"
+            android:textColor="@color/red_900"
+            android:paddingHorizontal="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/btnDelete"
+            android:layout_marginTop="8dp">
+
+            <ImageButton
+                android:id="@+id/ivPortfile"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_portfile"
+                android:background="@color/transparent"/>
+
+            <TextView
+                android:id="@+id/tvEventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="22sp"
+                android:fontFamily="@font/roboto_semibold"
+                android:textColor="@color/black_1000"
+                android:ellipsize="end"
+                android:text="Midterm Algorithms"/>
+
+            <TextView
+                android:id="@+id/tvEventDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/grey_300"
+                android:ellipsize="end"
+                android:text="Description about the meeting what is going to happen in the boring meeting"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="28dp"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_calendar_booking"
+                    android:backgroundTint="@color/black_1000"/>
+
+                <TextView
+                    android:id="@+id/tvEventDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black_1000"
+                    android:ellipsize="end"
+                    android:layout_marginStart="12dp"
+                    android:text="Sunday, 21 Jan"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="28dp"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_clock"
+                    android:backgroundTint="@color/black_1000"/>
+
+                <TextView
+                    android:id="@+id/tvEventTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black_1000"
+                    android:ellipsize="end"
+                    android:layout_marginStart="12dp"
+                    android:text="09:30 am - 10:30 am"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="28dp"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_clock"
+                    android:backgroundTint="@color/black_1000"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black_1000"
+                    android:ellipsize="end"
+                    android:layout_marginStart="12dp"
+                    android:text="Task List"/>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:isScrollContainer="false"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="30dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="36dp"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_clock"
+                    android:backgroundTint="@color/black_1000"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black_1000"
+                    android:ellipsize="end"
+                    android:layout_marginStart="12dp"
+                    android:text="Suggestion"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvSuggestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/grey_300"
+                android:ellipsize="end"
+                android:text="Jan 21 you will be in Tokyo. Book a flight ticket. This is in clash with other meeting"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

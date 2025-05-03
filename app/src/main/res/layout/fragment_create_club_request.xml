@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.requests.CreateClubRequestFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_arrow_back"
+            android:background="@color/white_1000"
+            android:layout_marginTop="58dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:fontFamily="@font/roboto_semibold"
+            android:textColor="@color/grey_900"
+            android:ellipsize="end"
+            android:text="Requests"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"/>
+
+        <LinearLayout
+            android:id="@+id/llRequestInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:orientation="vertical"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+            <TextView
+                android:id="@+id/tvSender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/grey_900"
+                android:ellipsize="end"
+                android:text="Sender: Akniyet Serik"/>
+
+            <TextView
+                android:id="@+id/tvCreateDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/grey_900"
+                android:ellipsize="end"
+                android:text="Date of create: 12.05.2025 12: 25"
+                android:layout_marginTop="18dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="18dp">
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/grey_900"
+                    android:ellipsize="end"
+                    android:text="Status:"/>
+
+                <EditText
+                    android:id="@+id/etStatus"
+                    android:inputType="text"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/sh_edit_text"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColorHint="@color/grey_600"
+                    android:textColor="@color/grey_900"
+                    android:textSize="14sp"
+                    android:text="Status"
+                    android:layout_marginStart="12dp"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:paddingHorizontal="16dp"
+                    android:gravity="center_vertical"
+                    android:enabled="false"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/grey_900"
+                android:ellipsize="end"
+                android:text="Comment: Please find your credentials on email"
+                android:layout_marginTop="18dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRequests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="22dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/llRequestInfo">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Name of the club*"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etClubName"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Goal of the club*"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etGoal"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Detailed description*"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etDescription"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Club financing*"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etFinance"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Resources/equipment needed for the club"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etEquipment"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Methods of attracting participants*"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etMethods"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Head of the club*"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etHead"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Email*"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Phone*"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Other communication methods*"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etContacts"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Comment"
+                android:textColor="@color/grey_900"
+                android:layout_marginTop="14dp"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etComment"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sh_edit_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textColorHint="@color/grey_600"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSend"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/sh_12dp"
+                android:backgroundTint="@color/blue_800"
+                android:text="Send"
+                android:textAllCaps="false"
+                android:fontFamily="@font/roboto_semibold"
+                android:textSize="16sp"
+                android:textColor="@color/white_1000"
+                android:layout_marginVertical="34dp"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

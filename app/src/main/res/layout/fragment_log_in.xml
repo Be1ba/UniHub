@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_1000"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.authentication.login.LogInFragment">
+
+    <LinearLayout
+        android:id="@+id/llTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical"
+        android:layout_marginHorizontal="36dp"
+        android:layout_marginTop="61dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_arrow_back"
+            android:background="@color/white_1000"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Log into account"
+            android:textAlignment="center"
+            android:textColor="@color/black_1000"
+            android:textSize="20sp"
+            android:layout_weight="1"/>
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="34dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Email"
+            android:textColor="@color/grey_900"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:hint="example@example"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/sh_edit_text"
+            android:fontFamily="@font/roboto_regular"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/grey_600"
+            android:textColor="@color/grey_900"
+            android:textSize="16sp"
+            android:paddingHorizontal="16dp"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Password"
+            android:textColor="@color/grey_900"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:hint="Enter password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/sh_edit_text"
+            android:fontFamily="@font/roboto_regular"
+            android:textColorHint="@color/grey_600"
+            android:textColor="@color/grey_900"
+            android:textSize="16sp"
+            android:paddingHorizontal="16dp"
+            android:gravity="center_vertical"
+            android:drawableEnd="@drawable/ic_hide"
+            android:drawablePadding="12dp"/>
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Confirm password"
+            android:textColor="@color/red_900"
+            android:textSize="16sp"
+            android:visibility="invisible"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/sh_12dp"
+            android:backgroundTint="@color/blue_800"
+            android:text="Log in"
+            android:textAllCaps="false"
+            android:fontFamily="@font/roboto_semibold"
+            android:textSize="16sp"
+            android:textColor="@color/white_1000"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_semibold"
+            android:text="Forgot password?"
+            android:textAlignment="center"
+            android:textColor="@color/grey_900"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

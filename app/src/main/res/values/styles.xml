@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="style_corner_16dp">
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="style_corner_25dp">
+        <item name="cornerSize">25dp</item>
+    </style>
+    <style name="style_corner_rounded">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="CalendarTextStyle" parent="ThemeOverlay.MaterialComponents">
+        <item name="android:textColor">@color/red_900</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/blue_800</item>
+    </style>
+
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/blue_800</item>
+        <item name="android:textColorPrimary">@color/blue_800</item>
+        <item name="android:textColorPrimaryInverse">@color/white_1000</item>
+    </style>
+
+    <style name="CustomTimePickerDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <!-- Цвет фона диалога -->
+        <item name="android:windowBackground">@color/blue_200</item>
+        <!-- Цвет текста времени -->
+        <item name="android:textColorPrimary">@color/blue_800</item>
+        <!-- Цвет кнопки "OK" -->
+        <item name="colorPrimary">@color/blue_800</item>
+        <item name="colorOnPrimary">@color/white_1000</item>
+        <!-- Цвет кнопки "Cancel" -->
+        <item name="colorSecondary">@color/grey_200</item>
+        <item name="colorOnSecondary">@color/white_1000</item>
+        <!-- Цвет заголовка диалога -->
+        <item name="android:textColor">@color/blue_800</item>
+        <!-- Цвет фона диалогового окна -->
+        <item name="android:colorBackground">@color/white_1000</item>
+        <item name="colorAccent">@color/grey_200</item>
+    </style></resources>
