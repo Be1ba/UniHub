@@ -5,23 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.unihub.data.model.admin.UsersListResponseItem
 import com.example.unihub.databinding.ItemRequestBinding
 import com.example.unihub.databinding.ItemUserAdminBinding
+import com.example.unihub.utils.RcViewItemClickIdCallback
 import com.example.unihub.utils.RcViewItemClickIdStringCallback
 
 open class UsersListItemAdapter: RecyclerView.Adapter<UsersListItemAdapter.RequestsViewHolder>() {
 
-    private val diffCallback = object : DiffUtil.ItemCallback<String>() {
+    private val diffCallback = object : DiffUtil.ItemCallback<UsersListResponseItem>() {
         override fun areItemsTheSame(
-            oldItem: String,
-            newItem: String
+            oldItem: UsersListResponseItem,
+            newItem: UsersListResponseItem
         ): Boolean {
             return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: String,
-            newItem: String
+            oldItem: UsersListResponseItem,
+            newItem: UsersListResponseItem
         ): Boolean {
             return oldItem == newItem
         }
@@ -29,17 +31,17 @@ open class UsersListItemAdapter: RecyclerView.Adapter<UsersListItemAdapter.Reque
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    fun submitList(list: List<String>) {
+    fun submitList(list: List<UsersListResponseItem>) {
         differ.submitList(list)
     }
 
-    var listenerClickUserName: RcViewItemClickIdStringCallback? = null
-    fun setOnUserNameClickListener(listener: RcViewItemClickIdStringCallback) {
+    var listenerClickUserName: RcViewItemClickIdCallback? = null
+    fun setOnUserNameClickListener(listener: RcViewItemClickIdCallback) {
         this.listenerClickUserName = listener
     }
 
-    var listenerClickDelete: RcViewItemClickIdStringCallback? = null
-    fun setOnDeleteClickListener(listener: RcViewItemClickIdStringCallback) {
+    var listenerClickDelete: RcViewItemClickIdCallback? = null
+    fun setOnDeleteClickListener(listener: RcViewItemClickIdCallback) {
         this.listenerClickDelete = listener
     }
 
@@ -48,16 +50,16 @@ open class UsersListItemAdapter: RecyclerView.Adapter<UsersListItemAdapter.Reque
     ) : RecyclerView.ViewHolder(
             binding.root
     ) {
-        fun onBind(item: String) {
+        fun onBind(item: UsersListResponseItem) {
             binding.run {
-                tvUserName.text = item
+                tvUserName.text = item.name + " " + item.surname
 
                 tvUserName.setOnClickListener {
-                    listenerClickUserName?.onClick(item)
+                    listenerClickUserName?.onClick(item.id)
                 }
 
                 ibDelete.setOnClickListener {
-                    listenerClickDelete?.onClick(item)
+                    listenerClickDelete?.onClick(item.id)
                 }
             }
         }

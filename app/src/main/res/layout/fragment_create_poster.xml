@@ -83,6 +83,7 @@
                 android:textSize="16sp"
                 android:paddingHorizontal="16dp"
                 android:gravity="center_vertical"
+                android:enabled="false"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -123,6 +124,7 @@
                 android:drawableEnd="@drawable/ic_calendar_event"
                 android:drawableTint="@color/grey_600"
                 android:paddingHorizontal="16dp"
+                android:enabled="false"
                 android:gravity="center_vertical"
                 android:layout_weight="1"/>
 
@@ -162,6 +164,7 @@
                 android:textColor="@color/grey_900"
                 android:textSize="16sp"
                 android:paddingHorizontal="16dp"
+                android:enabled="false"
                 android:gravity="center_vertical"
                 android:layout_weight="1"/>
 
@@ -203,6 +206,7 @@
                 android:drawableEnd="@drawable/ic_clock_event"
                 android:drawableTint="@color/grey_600"
                 android:paddingHorizontal="16dp"
+                android:enabled="false"
                 android:gravity="center_vertical"
                 android:layout_weight="1"/>
 
@@ -243,6 +247,7 @@
             android:textColorHint="@color/grey_600"
             android:textColor="@color/grey_900"
             android:textSize="16sp"
+            android:enabled="false"
             android:paddingHorizontal="16dp"
             android:gravity="center_vertical"/>
 
@@ -367,6 +372,18 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Error message"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textColor="@color/red_900"
+            android:textSize="16sp"
+            android:layout_weight="1"/>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSend"
             android:layout_width="match_parent"
@@ -377,6 +394,7 @@
             android:textAllCaps="false"
             android:fontFamily="@font/roboto_semibold"
             android:textSize="16sp"
+            android:enabled="false"
             android:textColor="@color/white_1000"
             android:layout_marginVertical="34dp"/>
 

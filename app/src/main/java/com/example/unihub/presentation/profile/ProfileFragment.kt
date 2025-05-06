@@ -34,8 +34,8 @@ class ProfileFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        provideNavigationHost()?.hideBottomNavigationBar(true)
         val sharedProvider = SharedProvider(requireContext())
+        provideNavigationHost()?.hideBottomNavigationBar(sharedProvider.getRole().lowercase().contains("admin"))
 
         profileViewModel.getUserProfile(sharedProvider.getToken())
 
@@ -53,6 +53,13 @@ class ProfileFragment : Fragment() {
                 findNavController().popBackStack()
             }
 
+            if (sharedProvider.getRole().lowercase().contains("admin"))
+                btnWrite.visibility = View.GONE
+
+            btnWrite.setOnClickListener {
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToCreateRequestFragment())
+            }
+
             llMyAccount.setOnClickListener {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
             }
@@ -63,6 +70,10 @@ class ProfileFragment : Fragment() {
 
             llLogOut.setOnClickListener {
                 showCustomDialogBox()
+            }
+
+            llLanguage.setOnClickListener {
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLanguageFragment())
             }
         }
 
@@ -88,6 +99,7 @@ class ProfileFragment : Fragment() {
 
         btnLogout.setOnClickListener {
             dialog.dismiss()
+            provideNavigationHost()?.setupBottomNavForRole(true)
             SharedProvider(requireContext()).clearShared()
             findNavController().navigate(R.id.welcomeFragment)
         }

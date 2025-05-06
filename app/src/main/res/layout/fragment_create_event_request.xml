@@ -84,7 +84,7 @@
                     android:ellipsize="end"
                     android:text="Status:"/>
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/etStatus"
                     android:inputType="text"
                     android:layout_width="0dp"

@@ -1,27 +1,32 @@
 package com.example.unihub.presentation.home.club
 
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unihub.data.model.club.ClubEventsResponseItem
+import com.example.unihub.data.model.poster.PostersByClubResponse
+import com.example.unihub.data.model.poster.PostersByClubResponseItem
 import com.example.unihub.databinding.ItemEventCardBinding
 import com.example.unihub.utils.RcViewItemClickIdCallback
 
 open class EventCardsAdapter: RecyclerView.Adapter<EventCardsAdapter.EventsViewHolder>() {
 
-    private val diffCallback = object : DiffUtil.ItemCallback<ClubEventsResponseItem>() {
+    private val diffCallback = object : DiffUtil.ItemCallback<PostersByClubResponseItem>() {
         override fun areItemsTheSame(
-            oldItem: ClubEventsResponseItem,
-            newItem: ClubEventsResponseItem
+            oldItem: PostersByClubResponseItem,
+            newItem: PostersByClubResponseItem
         ): Boolean {
             return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ClubEventsResponseItem,
-            newItem: ClubEventsResponseItem
+            oldItem: PostersByClubResponseItem,
+            newItem: PostersByClubResponseItem
         ): Boolean {
             return oldItem == newItem
         }
@@ -29,7 +34,7 @@ open class EventCardsAdapter: RecyclerView.Adapter<EventCardsAdapter.EventsViewH
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    fun submitList(list: List<ClubEventsResponseItem>) {
+    fun submitList(list: List<PostersByClubResponseItem>) {
         differ.submitList(list)
     }
 
@@ -43,17 +48,15 @@ open class EventCardsAdapter: RecyclerView.Adapter<EventCardsAdapter.EventsViewH
     ) : RecyclerView.ViewHolder(
         binding.root
     ) {
-        fun onBind(event: ClubEventsResponseItem) {
+        fun onBind(event: PostersByClubResponseItem) {
             binding.run {
-                tvEventName.text = event.eventName
-                tvDescription.text = event.shortDescription
+                tvEventName.text = event.eventTitle
+                tvDescription.text = event.description
                 tvDate.text = event.eventDate
+                tvTime.text = event.time
+                tvLocation.text = event.location
 
-//                tvSeats.text = event.location
-
-//                Glide.with(itemView.context)
-//                    .load(event.image)
-//                    .into(ivPostImage)
+                showBase64Image(event.image, ivPostImage)
 
                 root.setOnClickListener {
                     listenerClickCard?.onClick(event.id)
@@ -80,5 +83,15 @@ open class EventCardsAdapter: RecyclerView.Adapter<EventCardsAdapter.EventsViewH
 
     override fun getItemCount(): Int {
         return differ.currentList.size
+    }
+
+    fun showBase64Image(base64String: String, imageView: ImageView) {
+        try {
+            val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
+            val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+            imageView.setImageBitmap(bitmap)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

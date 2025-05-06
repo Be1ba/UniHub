@@ -45,7 +45,7 @@
             android:textColorHint="@color/grey_600"
             android:textColor="@color/black_900"
             android:textSize="14sp"
-            android:text="Choose template"
+            android:text="Create new post"
             android:layout_marginHorizontal="24dp"
             android:drawableEnd="@drawable/ic_arrow_down"
             android:paddingHorizontal="16dp"
@@ -85,6 +85,25 @@
             android:textSize="16sp"
             android:padding="16dp"
             android:gravity="top"/>
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_regular"
+            android:text="akniyet.serik@gmail.com"
+            android:textAlignment="center"
+            android:textColor="@color/red_900"
+            android:textSize="13sp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/imagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
 
     </LinearLayout>
 

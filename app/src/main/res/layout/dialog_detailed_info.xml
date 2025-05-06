@@ -155,7 +155,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/tvRequestsName"
+                android:id="@+id/tvHeadName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
@@ -165,7 +165,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:id="@+id/tvName"
+                android:id="@+id/tvHeadPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_light"
@@ -197,6 +197,7 @@
         android:layout_marginTop="38dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/llContacts"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -211,6 +212,7 @@
         android:layout_marginTop="14dp"
         android:layout_marginBottom="20dp"
         android:layout_marginStart="20dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/tvContactNumber"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -226,6 +228,7 @@
         android:text="8 747 777 77 77"
         android:layout_marginStart="22dp"
         android:layout_marginEnd="20dp"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/ivNumber"
         app:layout_constraintTop_toTopOf="@+id/ivNumber"
         app:layout_constraintBottom_toBottomOf="@+id/ivNumber"

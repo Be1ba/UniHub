@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.unihub.R
 import com.example.unihub.databinding.FragmentAdminPageBinding
 import com.example.unihub.presentation.requests.RequestItemAdapter
+import com.example.unihub.utils.RcViewItemClickIdCallback
 import com.example.unihub.utils.RcViewItemClickIdStringCallback
 import com.example.unihub.utils.SharedProvider
 import com.example.unihub.utils.provideNavigationHost
@@ -19,6 +21,7 @@ import com.example.unihub.utils.provideNavigationHost
 class AdminPageFragment : Fragment() {
 
     private lateinit var binding: FragmentAdminPageBinding
+    private val adminViewModel: AdminViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,40 +34,58 @@ class AdminPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         provideNavigationHost()?.hideBottomNavigationBar(true)
+        val sharedProvider = SharedProvider(requireContext())
+
+        adminViewModel.getUsersList(sharedProvider.getToken())
 
         val adapterUsers = UsersListItemAdapter()
         val adapterClubs = UsersListItemAdapter()
+        var usersCount = adapterUsers.itemCount
+        var clubsCount = adapterClubs.itemCount
 
-        adapterUsers.submitList(listOf("User1", "User2", "User3", "User4", "User5", "User6", "User7", "User8", "User9", "User10"))
-        adapterClubs.submitList(listOf("Club1", "Club2", "Club3", "Club4", "Club5", "Club6", "Club7", "Club8", "Club9", "Club10"))
+        adminViewModel.getUsersListResponse.observe(viewLifecycleOwner) { usersList ->
+            adapterUsers.submitList(usersList)
+            usersCount = usersList.size
+            val filteredClubs = usersList.filter { user -> user.role?.contains("head") == true }
+            adapterClubs.submitList(filteredClubs)
+            clubsCount = filteredClubs.size
+            binding.run {
+                tvUsersCount.text = usersCount.toString()
+                tvClubsCount.text = clubsCount.toString()
+            }
+        }
+
+        adminViewModel.errorMessage.observe(viewLifecycleOwner) {
+            binding.tvWelcomeMsg.text = it.message
+        }
 
         adapterUsers.setOnDeleteClickListener(
-            object : RcViewItemClickIdStringCallback {
-                override fun onClick(id: String) {
+            object : RcViewItemClickIdCallback {
+                override fun onClick(id: Int?) {
                     showCustomDialogBox()
                 }
             }
         )
 
         adapterUsers.setOnUserNameClickListener(
-            object : RcViewItemClickIdStringCallback {
-                override fun onClick(id: String) {
+            object : RcViewItemClickIdCallback {
+                override fun onClick(id: Int?) {
                     findNavController().navigate(AdminPageFragmentDirections.actionAdminPageFragmentToEditUserFragment())
                 }
             }
         )
 
         adapterClubs.setOnDeleteClickListener(
-            object : RcViewItemClickIdStringCallback {
-                override fun onClick(id: String) {
+            object : RcViewItemClickIdCallback {
+                override fun onClick(id: Int?) {
                     showCustomDialogBox()
                 }
             }
         )
 
         adapterClubs.setOnUserNameClickListener(
-            object : RcViewItemClickIdStringCallback {
-                override fun onClick(id: String) {
+            object : RcViewItemClickIdCallback {
+                override fun onClick(id: Int?) {
                     findNavController().navigate(AdminPageFragmentDirections.actionAdminPageFragmentToEditUserFragment())
                 }
             }
@@ -75,17 +96,33 @@ class AdminPageFragment : Fragment() {
                 findNavController().navigate(AdminPageFragmentDirections.actionAdminPageFragmentToAddUserFragment())
             }
 
-            tvUsersList.setOnClickListener {
-                tvUsersList.setTextColor(resources.getColor(R.color.grey_600))
-                tvClubsList.setTextColor(resources.getColor(R.color.black_900))
+            btnMenu.setOnClickListener {
+                sidebar.visibility = View.VISIBLE
+            }
+
+            llHome.setOnClickListener {
+                sidebar.visibility = View.GONE
+            }
+
+            llProfile.setOnClickListener {
+                findNavController().navigate(AdminPageFragmentDirections.actionAdminPageFragmentToProfileFragment())
+            }
+
+            llRequests.setOnClickListener {
+                findNavController().navigate(AdminPageFragmentDirections.actionAdminPageFragmentToRequestsListFragment())
+            }
+
+            tvClubRequests.setOnClickListener {
+                idClubRequests.visibility = View.VISIBLE
+                idEventRequests.visibility = View.INVISIBLE
 
                 rvUsersList.visibility = View.VISIBLE
                 rvClubsList.visibility = View.GONE
             }
 
-            tvClubsList.setOnClickListener {
-                tvUsersList.setTextColor(resources.getColor(R.color.black_900))
-                tvClubsList.setTextColor(resources.getColor(R.color.grey_600))
+            tvEventRequests.setOnClickListener {
+                idClubRequests.visibility = View.INVISIBLE
+                idEventRequests.visibility = View.VISIBLE
 
                 rvUsersList.visibility = View.GONE
                 rvClubsList.visibility = View.VISIBLE

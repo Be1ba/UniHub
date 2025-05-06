@@ -43,7 +43,15 @@ class CreateRequestFragment : Fragment() {
 
         val requestItemAdapter = RequestItemAdapter()
 
-        requestItemAdapter
+        requestItemAdapter.setOnItemClickListener(
+            object : RcViewItemClickIdCallback {
+                override fun onClick(id: Int?) {
+                    findNavController().navigate(
+                        CreateRequestFragmentDirections.actionCreateRequestFragmentToCreateClubRequestFragment(id ?: 1, false)
+                    )
+                }
+            }
+        )
 
         binding.run {
             btnBack.setOnClickListener {

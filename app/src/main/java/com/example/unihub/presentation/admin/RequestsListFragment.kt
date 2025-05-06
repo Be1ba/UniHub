@@ -5,15 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.unihub.databinding.FragmentRequestsListBinding
-import com.example.unihub.presentation.requests.RequestItemAdapter
 import com.example.unihub.utils.RcViewItemClickIdCallback
+import com.example.unihub.utils.SharedProvider
 import com.example.unihub.utils.provideNavigationHost
 
 class RequestsListFragment : Fragment() {
 
     private lateinit var binding: FragmentRequestsListBinding
+    private val viewModel: AdminViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,15 +28,26 @@ class RequestsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         provideNavigationHost()?.hideBottomNavigationBar(true)
+        val sharedProvider = SharedProvider(requireContext())
 
-        val adapterClub = RequestItemAdapter()
-        val adapterEvent = RequestItemAdapter()
+        viewModel.getRequestsList(sharedProvider.getToken())
+        viewModel.getEventsList(sharedProvider.getToken())
 
+        val adapterClub = ClubRequestItemAdapter()
+        val adapterEvent = EventRequestItemAdapter()
+
+        viewModel.getRequestsListResponse.observe(viewLifecycleOwner) { requestsList ->
+            adapterClub.submitList(requestsList)
+        }
+
+        viewModel.getEventsListResponse.observe(viewLifecycleOwner) { eventsList ->
+            adapterEvent.submitList(eventsList)
+        }
 
         adapterClub.setOnItemClickListener(
             object : RcViewItemClickIdCallback {
                 override fun onClick(id: Int?) {
-                    findNavController().navigate(RequestsListFragmentDirections.actionRequestsListFragmentToCreateClubRequestFragment(id!!, false))
+                    findNavController().navigate(RequestsListFragmentDirections.actionRequestsListFragmentToCreateClubRequestFragment(id!!, true))
                 }
             }
         )
@@ -42,14 +55,14 @@ class RequestsListFragment : Fragment() {
         adapterEvent.setOnItemClickListener(
             object : RcViewItemClickIdCallback {
                 override fun onClick(id: Int?) {
-                    findNavController().navigate(RequestsListFragmentDirections.actionRequestsListFragmentToCreateEventRequestFragment(id!!, false))
+                    findNavController().navigate(RequestsListFragmentDirections.actionRequestsListFragmentToCreateEventRequestFragment(id!!, true))
                 }
             }
         )
 
         binding.run {
             btnBack.setOnClickListener {
-                findNavController().popBackStack()
+                findNavController().navigate(RequestsListFragmentDirections.actionRequestsListFragmentToAdminPageFragment())
             }
 
             rvEventRequestsList.adapter = adapterEvent

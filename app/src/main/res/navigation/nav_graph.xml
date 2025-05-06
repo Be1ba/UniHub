@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_welcomeFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -100,6 +103,10 @@
         <action
             android:id="@+id/action_homeFragment_to_newQuoteFragment"
             app:destination="@id/newQuoteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_adminPageFragment"
+            app:destination="@id/adminPageFragment"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/signInAdminFragment"
@@ -126,6 +133,12 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_createRequestFragment"
+            app:destination="@id/createRequestFragment" />
     </fragment>
     <fragment
         android:id="@+id/clubPageFragment"
@@ -221,6 +234,9 @@
                 android:name="fromAdmin"
                 app:argType="boolean" />
         </action>
+        <action
+            android:id="@+id/action_requestsListFragment_to_adminPageFragment"
+            app:destination="@id/adminPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
@@ -314,7 +330,11 @@
             app:destination="@id/chatFragment" />
         <action
             android:id="@+id/action_activitiesFragment_to_bookingDetailsFragment"
-            app:destination="@id/bookingDetailsFragment" />
+            app:destination="@id/bookingDetailsFragment">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"
@@ -340,7 +360,8 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_bookingFragment_to_registerBookingFragment"
-            app:destination="@id/registerBookingFragment">
+            app:destination="@id/registerBookingFragment"
+            app:popUpTo="@id/clubPageFragment">
             <argument
                 android:name="id"
                 app:argType="integer" />
@@ -521,5 +542,9 @@
         android:id="@+id/bookingDetailsFragment"
         android:name="com.example.unihub.presentation.home.club.BookingDetailsFragment"
         android:label="fragment_booking_details"
-        tools:layout="@layout/fragment_booking_details" />
+        tools:layout="@layout/fragment_booking_details">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

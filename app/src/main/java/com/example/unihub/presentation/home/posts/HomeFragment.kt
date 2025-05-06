@@ -1,5 +1,6 @@
 package com.example.unihub.presentation.home.posts
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -21,13 +23,21 @@ import com.example.unihub.databinding.FragmentHomeBinding
 import com.example.unihub.databinding.ItemPostCardBinding
 import com.example.unihub.utils.CustomDividerItemDecoration
 import com.example.unihub.utils.RcViewItemClickIdCallback
+import com.example.unihub.utils.SharedProvider
 import com.example.unihub.utils.SpacesItemDecoration
 import com.example.unihub.utils.provideNavigationHost
+import java.time.Duration
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var postBinding: ItemPostCardBinding
+    internal lateinit var postBinding: ItemPostCardBinding
+    private val postsViewModel: PostsViewModel by viewModels()
+    internal lateinit var firstPost: PostsResponseItem
+    private val clubsViewModel: ClubsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +50,18 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         provideNavigationHost()?.hideBottomNavigationBar(false)
-        provideNavigationHost()?.setupBottomNavForRole(true)
+        val sharedProvider = SharedProvider(requireContext())
+        provideNavigationHost()?.setupBottomNavForRole(sharedProvider.getRole().lowercase().contains("admin"))
 
-        val firstPost = PostsResponseItem(
+        if (sharedProvider.getRole().lowercase().contains("super")) {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAdminPageFragment())
+        }
+
+
+        postsViewModel.getPostsList(sharedProvider.getToken())
+        clubsViewModel.getClubList(sharedProvider.getToken())
+
+        firstPost = PostsResponseItem(
             id = 1,
             club = Club(
                 id = 1,
@@ -61,30 +80,34 @@ class HomeFragment : Fragment() {
         )
 
         val postsAdapter = PostsAdapter()
-        postsAdapter.submitList(List(10) {
-            PostsResponseItem(
-                id = 1,
-                club = Club(
+
+        postsViewModel.getPostListResponse.observe(viewLifecycleOwner) { postList->
+            postsAdapter.submitList(postList.filter { it.id != postList[0].id })
+            firstPost = postList?.firstOrNull()?:
+                PostsResponseItem(
                     id = 1,
-                    name = "Sample Club"
-                ),
-                content = "Sample content",
-                createdAt = "2023-01-01T00:00:00Z",
-                image = "sample_post_image_url",
-                likes = 100,
-                title = "Sample Title",
-                user = User(
-                    id = 1,
-                    name = "John",
-                    surname = "Doe"
+                    club = Club(
+                        id = 1,
+                        name = "Sample Club"
+                    ),
+                    content = "Sample content",
+                    createdAt = "2023-01-01T00:00:00Z",
+                    image = "sample_post_image_url",
+                    likes = 100,
+                    title = "Sample Title",
+                    user = User(
+                        id = 1,
+                        name = "John",
+                        surname = "Doe"
+                    )
                 )
-            )
-        })
+            updateFirstPost()
+        }
 
         postsAdapter.setOnLikeClickListener(
             object : RcViewItemClickIdCallback {
                 override fun onClick(id: Int?) {
-
+                    postsViewModel.likePost(sharedProvider.getToken(), id?: 1)
                 }
             }
         )
@@ -116,24 +139,15 @@ class HomeFragment : Fragment() {
         )
 
         val clubsAdapter = RecCardAdapter()
-        clubsAdapter.submitList(List(10) { ClubsResponseItem(
-            createdAt = "2023-01-01T00:00:00Z",
-            description = "Sample description",
-            goal = "Sample goal",
-            head = Head(
-                id = 1,
-                name = "John",
-                surname = "Doe"
-            ),
-            id = 1,
-            name = "Sample name",
-            rating = 5
-        ) })
+
+        clubsViewModel.getClubListResponse.observe(viewLifecycleOwner) { clubList ->
+            clubsAdapter.submitList(clubList)
+        }
 
         clubsAdapter.setOnFollowClickListener(
             object : RcViewItemClickIdCallback {
                 override fun onClick(id: Int?) {
-
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToClubPageFragment(id?: 1, ""))
                 }
             }
         )
@@ -142,38 +156,6 @@ class HomeFragment : Fragment() {
         val horizontalLinearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         postBinding = binding.firstPost
-
-        postBinding.run {
-            llClubInfo
-            tvClubName.text = firstPost.club?.name
-            tvTime.text = firstPost.createdAt
-            tvPostName.text = firstPost.content
-            var isLiked = false
-
-            if (firstPost.image.isEmpty())
-                ivPostImage.setImageResource(R.drawable.example_post)
-            else
-                Glide.with(requireContext())
-                    .load(firstPost.image)
-                    .into(ivPostImage)
-
-            if (isLiked)
-                btnLike.setImageResource(R.drawable.ic_liked)
-            else
-                btnLike.setImageResource(R.drawable.ic_unliked)
-
-            btnLike.setOnClickListener {
-                if (isLiked)
-                    btnLike.setImageResource(R.drawable.ic_unliked)
-                else
-                    btnLike.setImageResource(R.drawable.ic_liked)
-                isLiked = !isLiked
-            }
-
-            tvClubName.setOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToClubPageFragment(firstPost.club?.id ?: 1, ""))
-            }
-        }
 
         binding.run {
             rvPosts.layoutManager = verticalLinearLayoutManager
@@ -242,6 +224,55 @@ class HomeFragment : Fragment() {
                 llSearch.visibility = View.VISIBLE
             }
         }
+    }
+}
 
+@SuppressLint("NewApi")
+private fun getTimeAgo(isoTime: String): String {
+    val formatter = DateTimeFormatter.ISO_DATE_TIME
+    val updatedTime = ZonedDateTime.parse(isoTime, formatter)
+    val now = ZonedDateTime.now(ZoneId.of("UTC"))
+    val duration = Duration.between(updatedTime, now)
+
+    return when {
+        duration.toMinutes() < 1 -> "just now"
+        duration.toMinutes() < 60 -> "${duration.toMinutes()} minutes ago"
+        duration.toHours() < 24 -> "${duration.toHours()} hours ago"
+        duration.toDays() < 7 -> "${duration.toDays()} days ago"
+        else -> updatedTime.toLocalDate().toString() // Or format if needed
+    }
+}
+
+private fun HomeFragment.updateFirstPost() {
+    postBinding.run {
+        llClubInfo
+        tvClubName.text = firstPost.club?.name
+        tvTime.text = getTimeAgo(firstPost.createdAt)
+        tvPostName.text = firstPost.content
+        var isLiked = false
+
+        if (firstPost.image.isEmpty())
+            ivPostImage.setImageResource(R.drawable.example_post)
+        else
+            Glide.with(requireContext())
+                .load(firstPost.image)
+                .into(ivPostImage)
+
+        if (isLiked)
+            btnLike.setImageResource(R.drawable.ic_liked)
+        else
+            btnLike.setImageResource(R.drawable.ic_unliked)
+
+        btnLike.setOnClickListener {
+            if (isLiked)
+                btnLike.setImageResource(R.drawable.ic_unliked)
+            else
+                btnLike.setImageResource(R.drawable.ic_liked)
+            isLiked = !isLiked
+        }
+
+        tvClubName.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToClubPageFragment(firstPost.club?.id ?: 1, ""))
+        }
     }
 }

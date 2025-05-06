@@ -9,6 +9,7 @@ import com.example.unihub.data.model.MessageResponse
 import com.example.unihub.data.model.auth.PasswordChangeRequest
 import com.example.unihub.data.model.club_request.CreateClubRequest
 import com.example.unihub.data.model.club_request.MyCreateClubResponse
+import com.example.unihub.data.model.club_request.MyCreateClubResponseItem
 import com.example.unihub.data.model.users.UpdateUserProfileRequest
 import com.example.unihub.data.model.users.UserProfileResponse
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,15 @@ class RequestViewModel(): ViewModel() {
 
     private var _myRequestsResponse: MutableLiveData<MyCreateClubResponse> = MutableLiveData()
     val myRequestsResponse: LiveData<MyCreateClubResponse> = _myRequestsResponse
+
+    private var _getRequestDetailsResponse: MutableLiveData<MyCreateClubResponseItem> = MutableLiveData()
+    val getRequestDetailsResponse: LiveData<MyCreateClubResponseItem> = _getRequestDetailsResponse
+
+    private var _approveResponse: MutableLiveData<MessageResponse> = MutableLiveData()
+    val approveResponse: LiveData<MessageResponse> = _approveResponse
+
+    private var _rejectResponse: MutableLiveData<MessageResponse> = MutableLiveData()
+    val rejectResponse: LiveData<MessageResponse> = _rejectResponse
 
     private var _errorMessage: MutableLiveData<MessageResponse> = MutableLiveData()
     val errorMessage: LiveData<MessageResponse> = _errorMessage
@@ -65,6 +75,93 @@ class RequestViewModel(): ViewModel() {
             }.fold(
                 onSuccess = {
                     _myRequestsResponse.postValue(it)
+                },
+                onFailure = { throwable ->
+                    val errorMessage = if (throwable is HttpException) {
+                        val errorBody = throwable.response()?.errorBody()?.string()
+                        try {
+                            val json = JSONObject(errorBody ?: "")
+                            json.getString("message")
+                        } catch (e: Exception) {
+                            "Something went wrong."
+                        }
+                    } else {
+                        throwable.message ?: "An unknown error occurred."
+                    }
+                    _errorMessage.postValue(MessageResponse(errorMessage))
+                }
+            )
+        }
+    }
+
+    fun getRequestDetails(token: String, requestId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                ServiceBuilder.api.getRequestDetails(
+                    token = token,
+                    requestId = requestId
+                )
+            }.fold(
+                onSuccess = {
+                    _getRequestDetailsResponse.postValue(it)
+                },
+                onFailure = { throwable ->
+                    val errorMessage = if (throwable is HttpException) {
+                        val errorBody = throwable.response()?.errorBody()?.string()
+                        try {
+                            val json = JSONObject(errorBody ?: "")
+                            json.getString("message")
+                        } catch (e: Exception) {
+                            "Something went wrong."
+                        }
+                    } else {
+                        throwable.message ?: "An unknown error occurred."
+                    }
+                    _errorMessage.postValue(MessageResponse(errorMessage))
+                }
+            )
+        }
+    }
+
+    fun approveRequest(token: String, requestId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                ServiceBuilder.api.approveClubRequest(
+                    token = token,
+                    requestId = requestId
+                )
+            }.fold(
+                onSuccess = {
+                    _approveResponse.postValue(it)
+                },
+                onFailure = { throwable ->
+                    val errorMessage = if (throwable is HttpException) {
+                        val errorBody = throwable.response()?.errorBody()?.string()
+                        try {
+                            val json = JSONObject(errorBody ?: "")
+                            json.getString("message")
+                        } catch (e: Exception) {
+                            "Something went wrong."
+                        }
+                    } else {
+                        throwable.message ?: "An unknown error occurred."
+                    }
+                    _errorMessage.postValue(MessageResponse(errorMessage))
+                }
+            )
+        }
+    }
+
+    fun rejectRequest(token: String, requestId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                ServiceBuilder.api.rejectClubRequest(
+                    token = token,
+                    requestId = requestId
+                )
+            }.fold(
+                onSuccess = {
+                    _rejectResponse.postValue(it)
                 },
                 onFailure = { throwable ->
                     val errorMessage = if (throwable is HttpException) {

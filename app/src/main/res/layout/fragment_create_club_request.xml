@@ -47,6 +47,18 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
             <TextView
+                android:id="@+id/tvError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/red_900"
+                android:ellipsize="end"
+                android:visibility="gone"
+                android:text="Error: Please fill all fields"/>
+
+            <TextView
                 android:id="@+id/tvSender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,7 +96,7 @@
                     android:ellipsize="end"
                     android:text="Status:"/>
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/etStatus"
                     android:inputType="text"
                     android:layout_width="0dp"
@@ -99,7 +111,6 @@
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:paddingHorizontal="16dp"
                     android:gravity="center_vertical"
-                    android:enabled="false"
                     android:layout_weight="1"/>
 
             </LinearLayout>

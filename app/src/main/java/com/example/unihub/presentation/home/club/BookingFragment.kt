@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.unihub.R
 import com.example.unihub.databinding.FragmentBookingBinding
+import com.example.unihub.presentation.club.ClubViewModel
+import com.example.unihub.utils.SharedProvider
 import com.example.unihub.utils.provideNavigationHost
 import kotlin.getValue
 
@@ -32,7 +34,21 @@ class BookingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         provideNavigationHost()?.hideBottomNavigationBar(true)
+        val sharedProvider = SharedProvider(requireContext())
 
+        clubViewModel.getPosterDetails(sharedProvider.getToken(), args.id)
+
+        clubViewModel.posterResponse.observe(viewLifecycleOwner) { response ->
+            binding.run {
+                tvTitle.text = response.eventTitle
+                tvDescription.text = response.description
+                tvDate.text = response.eventDate
+                tvTime.text = response.time
+                tvLocation.text = response.location
+                tvSeatsNumber.text = "Number of seats: " + response.seatsLeft.toString()
+                tvPrice.text = response.price.toString() + " KZT/Person"
+            }
+        }
 
         binding.run {
             btnBack.setOnClickListener {

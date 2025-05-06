@@ -60,6 +60,14 @@ class SharedProvider(private val context: Context) {
         return preferences.getString("phone", "without_phone").toString()
     }
 
+    fun saveClubId(clubId: Int) {
+        preferences.edit() { putInt("club_id", clubId) }
+    }
+
+    fun getClubId(): Int {
+        return preferences.getInt("club_id", 0)
+    }
+
     fun saveGender(gender: String) {
         preferences.edit() { putString("gender", gender) }
     }

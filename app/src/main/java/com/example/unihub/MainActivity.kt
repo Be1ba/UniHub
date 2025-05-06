@@ -85,8 +85,5 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
         } else {
             binding.bottomNavigationBarMainActivity.inflateMenu(R.menu.bottom_menu)
         }
-
-        val navController = findNavController(R.id.nav_host_fragment)
-        binding.bottomNavigationBarMainActivity.setupWithNavController(navController)
     }
 }

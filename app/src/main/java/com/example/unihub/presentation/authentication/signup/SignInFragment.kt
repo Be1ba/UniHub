@@ -83,13 +83,15 @@ class SignInFragment : Fragment() {
             }
 
             authViewModel.signupResponse.observe(viewLifecycleOwner) {
-                Log.d("Login Response", it.message.toString())
+                Log.d("Login Response", it.toString())
                 sharedProvider.saveToken(it.token.toString())
                 sharedProvider.saveEmail(it.user.email.toString())
                 sharedProvider.saveName(it.user.name.toString())
                 sharedProvider.saveSurname(it.user.surname.toString())
                 sharedProvider.saveRole(it.user.role.toString())
                 sharedProvider.saveID(it.user.id)
+                sharedProvider.saveIsAuthorized(true)
+                provideNavigationHost()?.setupBottomNavForRole(it.user.role.toString().lowercase().contains("admin"))
                 findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
             }
 

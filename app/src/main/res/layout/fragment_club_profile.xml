@@ -208,6 +208,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/grey_600"
                 android:textSize="17sp"
+                android:visibility="gone"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -241,7 +242,7 @@
                 android:layout_height="1dp"
                 android:background="@color/black_1000"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="gone"/>
 
         </LinearLayout>
 

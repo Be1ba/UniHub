@@ -7,16 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.unihub.R
 import com.example.unihub.databinding.FragmentRegisterBookingBinding
+import com.example.unihub.presentation.club.ClubViewModel
 import com.example.unihub.presentation.club.CreateNewPostFragment
+import com.example.unihub.utils.SharedProvider
 import com.example.unihub.utils.provideNavigationHost
 
 class RegisterBookingFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBookingBinding
+    private val clubViewModel: ClubViewModel by viewModels()
     private val args: RegisterBookingFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -30,10 +34,26 @@ class RegisterBookingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         provideNavigationHost()?.hideBottomNavigationBar(true)
+        val sharedProvider = SharedProvider(requireContext())
+
+        clubViewModel.buyTicketResponse.observe(viewLifecycleOwner) {
+            findNavController().popBackStack()
+        }
+
+        clubViewModel.errorMessage.observe(viewLifecycleOwner) {
+            binding.tvTitle.text = it.message
+        }
 
         binding.run {
             btnRegister.setOnClickListener {
-                findNavController().navigate(RegisterBookingFragmentDirections.actionRegisterBookingFragmentToClubPageFragment(id = args.id, type = "book"))
+                val numberOfPerson = etNumberOfPerson.text.toString()
+                val paymentProof = ""
+                clubViewModel.buyTicket(
+                    token = sharedProvider.getToken(),
+                    posterId = args.id,
+                    numberOfPersons = numberOfPerson.toInt(),
+                    paymentProof = paymentProof
+                )
             }
 
             ivDropFiles.setOnClickListener {

@@ -2,6 +2,7 @@ package com.example.unihub.presentation.authentication
 
 import android.os.Bundle
 import android.text.Layout
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.unihub.R
 import com.example.unihub.databinding.FragmentWelcomeBinding
+import com.example.unihub.utils.SharedProvider
 import com.example.unihub.utils.provideNavigationHost
 
 class WelcomeFragment : Fragment() {
@@ -26,6 +28,12 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         provideNavigationHost()?.hideBottomNavigationBar(true)
+        val sharedProvider = SharedProvider(requireContext())
+
+        if (sharedProvider.isAuthorized()) {
+            Log.d("WelcomeFragment", "isAuthorized: ${sharedProvider.getRole()}")
+            findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment())
+        }
 
         binding.run {
             btnCreate.setOnClickListener{

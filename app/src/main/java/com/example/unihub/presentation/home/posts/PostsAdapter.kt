@@ -1,5 +1,6 @@
 package com.example.unihub.presentation.home.posts
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -10,6 +11,10 @@ import com.example.unihub.R
 import com.example.unihub.data.model.post.PostsResponseItem
 import com.example.unihub.databinding.ItemPostCardBinding
 import com.example.unihub.utils.RcViewItemClickIdCallback
+import java.time.Duration
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 open class PostsAdapter: RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
 
@@ -63,7 +68,7 @@ open class PostsAdapter: RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
         fun onBind(posts: PostsResponseItem) {
             binding.run {
                 tvClubName.text = posts.club?.name
-                tvTime.text = posts.createdAt
+                tvTime.text = getTimeAgo(posts.createdAt)
                 tvPostName.text = posts.content
                 var isLiked = false
 
@@ -121,5 +126,21 @@ open class PostsAdapter: RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
 
     override fun getItemCount(): Int {
         return differ.currentList.size
+    }
+
+    @SuppressLint("NewApi")
+    fun getTimeAgo(isoTime: String): String {
+        val formatter = DateTimeFormatter.ISO_DATE_TIME
+        val updatedTime = ZonedDateTime.parse(isoTime, formatter)
+        val now = ZonedDateTime.now(ZoneId.of("UTC"))
+        val duration = Duration.between(updatedTime, now)
+
+        return when {
+            duration.toMinutes() < 1 -> "just now"
+            duration.toMinutes() < 60 -> "${duration.toMinutes()} minutes ago"
+            duration.toHours() < 24 -> "${duration.toHours()} hours ago"
+            duration.toDays() < 7 -> "${duration.toDays()} days ago"
+            else -> updatedTime.toLocalDate().toString() // Or format if needed
+        }
     }
 }
